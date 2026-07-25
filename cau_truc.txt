@@ -1,0 +1,46 @@
+
+chess-ai/
+├── main.py
+├── requirements.txt
+│
+├── game/                  ← Lớp 2
+│   ├── board.py
+│   ├── moves.py
+│   ├── rules.py
+│   └── game.py
+│
+├── ai/                    ← Lớp 3
+│   ├── shared/
+│   │   ├── network.py     ← PyTorch model
+│   │   └── mcts.py
+│   ├── self_play/
+│   │   ├── self_play.py
+│   │   └── replay_buffer.py
+│   ├── training/
+│   │   ├── trainer.py
+│   │   └── loss.py
+│   ├── evaluation/
+│   │   ├── evaluator.py
+│   │   └── arena.py
+│   └── ai_loop.py
+│
+└── ui/                    ← Lớp 1 (tuỳ chọn)
+    └── cli.py             ← giao diện terminal đơn giản
+    
+    thứ tự code
+1. game/board.py          ← không phụ thuộc gì, làm trước nhất
+2. game/moves.py          ← cần board.py
+3. game/rules.py          ← cần board.py + moves.py
+4. game/game.py           ← cần tất cả game/
+   ── viết test, chạy thử ──
+5. ui/cli.py              ← in bàn cờ ra terminal, test trực quan
+   ── có thể chơi người vs người ──
+6. ai/shared/network.py   ← PyTorch model, độc lập
+7. ai/shared/mcts.py      ← cần network + moves
+8. ai/self_play/...
+9. ai/training/...
+10. ai/evaluation/...
+11. ai/ai_loop.py
+ - pytorch
+  - torchvision
+  - torchaudio
