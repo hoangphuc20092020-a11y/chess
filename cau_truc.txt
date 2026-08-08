@@ -29,6 +29,12 @@ chess-ai/
     
     thứ tự code
 1. game/board.py          ← không phụ thuộc gì, làm trước nhất
+   - self.grid: giữ liệu bàn cờ
+   - self.turn: trạng thái lượt đi
+   - self.history: lịch sử nước đi
+   PHỤC VỤ
+   - moves.py cung cấp thông tin vị trí các quân cờ để moves.py tính toán danh sách các nước đi hợp lệ (Legal Moves).
+   - rules.py: Cung cấp dữ liệu để rules.py kiểm tra xem bàn cờ hiện tại có bị Chiếu (Check), Chiếu hết (Checkmate), hay Hòa cờ (Stalemate/Draw) không.
 2. game/moves.py          ← cần board.py
 3. game/rules.py          ← cần board.py + moves.py
 4. game/game.py           ← cần tất cả game/
