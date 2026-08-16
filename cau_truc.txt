@@ -35,7 +35,12 @@ chess-ai/
    PHỤC VỤ
    - moves.py cung cấp thông tin vị trí các quân cờ để moves.py tính toán danh sách các nước đi hợp lệ (Legal Moves).
    - rules.py: Cung cấp dữ liệu để rules.py kiểm tra xem bàn cờ hiện tại có bị Chiếu (Check), Chiếu hết (Checkmate), hay Hòa cờ (Stalemate/Draw) không.
+
 2. game/moves.py          ← cần board.py
+   - trách nghiệm chính của file này:  tạo và tìm các nước đi có thể thực hiện
+   - " Quân này có thể đi đâu" nói các khác tạo cách đi cho các Quân
+   
+
 3. game/rules.py          ← cần board.py + moves.py
 4. game/game.py           ← cần tất cả game/
    ── viết test, chạy thử ──

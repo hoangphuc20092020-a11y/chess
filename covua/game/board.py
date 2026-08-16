@@ -103,7 +103,7 @@ class Board:
     
     def is_friend(self, row: int, col: int, color: str) -> bool:
         piece = self.grid[row][col]
-        return piece is not None and piece == color
+        return piece is not None and piece[0] == color
     
     
     # ---------------------------------------------------------------- #
@@ -157,7 +157,8 @@ class Board:
     #  Tìm kiếm
     # ---------------------------------------------------------------- #    
     def find_king(self, color: str) -> Optional[tuple]:
-        """tìm vị trí vua. Trả (row, col) hoặc None"""
+        """tìm vị trí vua. 
+        Trả (row, col) hoặc None"""
         target = color + KING # target- mục tiêu
         for r in range(8):
             for c in range(8):
@@ -196,7 +197,7 @@ class Board:
         # đây là Dicrionary
         piece_to_channel = {
             'wp': 0, 'wN': 1, 'wB': 2,
-            'wR': 3, 'wQ': 4, 'WK': 5,
+            'wR': 3, 'wQ': 4, 'wK': 5,
             
             'bp': 6, 'bN': 7, 'bB': 8,
             'bR': 9, 'bQ': 10, 'bK': 11,
