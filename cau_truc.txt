@@ -27,6 +27,7 @@ chess-ai/
 └── ui/                    ← Lớp 1 (tuỳ chọn)
     └── cli.py             ← giao diện terminal đơn giản
     
+
     thứ tự code
 1. game/board.py          ← không phụ thuộc gì, làm trước nhất
    - self.grid: giữ liệu bàn cờ
@@ -42,6 +43,11 @@ chess-ai/
    
 
 3. game/rules.py          ← cần board.py + moves.py
+   -trách nghiệm chính của file này:Kiểm tra trạng thái đặc biệt của ván cờ.
+   - được dùng bởi:
+      + game.py   : kiểm tra sau mỗi nước đi
+      + mcts.py   : đánh giá thế cờ cuối ván
+      
 4. game/game.py           ← cần tất cả game/
    ── viết test, chạy thử ──
 5. ui/cli.py              ← in bàn cờ ra terminal, test trực quan

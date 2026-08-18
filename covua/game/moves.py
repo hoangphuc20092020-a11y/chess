@@ -1,5 +1,5 @@
 # MỖI DÒNG CODE LÀ  NGHỆ THUẬT
-# KHÔNG HIỂU CODE ĐÓ LÀM GÌ THÌ ĐỪNG VIẾT VÀO 
+# KHÔNG HIỂU CODE ĐÓ LÀM GÌ,THÌ ĐỪNG VIẾT VÀO 
 """
 game/moves.py
 -------------
