@@ -119,11 +119,14 @@ class Board:
             'promo':    str | None   (phong cấp: 'Q','R','B','N')
         }
         """
+        
         new_board = self.clone() # tạo bản sao của bàn cờ hiện tại
         fr, fc = move['from_row'], move['from_col']
         tr, tc = move['to_row'], move['to_col']
         
+        captured = self.grid[tr][tc] 
         piece = new_board.grid[fr][fc]
+        
         new_board.grid[tr][tc] = piece
         new_board.grid[fr][fc] = None
         
@@ -133,6 +136,12 @@ class Board:
         
         new_board.last_move = move
         new_board.turn = BLACK if self.turn == WHITE else WHITE
+        # lưu snapshost vào history
+        new_board.history = self.history + [{
+            'move': move,
+            'captured': captured,
+            'piece': piece,
+        }]
         return new_board 
     # ---------------------------------------------------------------- #
     #  Clone & Reset
