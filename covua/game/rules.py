@@ -76,10 +76,10 @@ class RuleChecker:
         - Reset về 0 khi: tốt di chuyển hoặc quân bị ăn
         - Đạt 100 half-moves (50 nước mỗi bên) → hòa
         """
-        half_move_clock = 0
-        for snapshot in reversed(board.history): # reversed() chi ngược danh sách
+        half_move_clock = 0 # để điếm lịch sử nước đi của board
+        for snapshot in reversed(board.history): # reversed() chi ngược danh sách 
             captured = snapshot['captured'] # quân bị ăn (None nếu không)
-            piece = snapshot['piece'] # quân vừa di chuyển
+            piece = snapshot['piece'] # quân vừa di chuyển 
             
             # reset nếu ăn quân hoặc tốt di chuyển
             if captured or (piece and piece[1] =='p'):
@@ -97,15 +97,51 @@ class RuleChecker:
           - Vua + Mã vs Vua
           - Vua + Tượng vs Vua + Tượng (cùng màu ô)
         """
-        pieces = {'w': [], 'b': []}
-        for r in range(8):
+        pieces = {'w': [], 'b': []} # tạo 2 danh sách rỗng QUÂN TRẮNG VÀ ĐEN
+        for r in range(8): # duyệt bàn cờ tìm quân 
             for c in range(8):
                 p = board.get(r,c)
                 if p:
-                    pieces[p[0]].append((p[1], r, c))
+                    pieces[p[0]].append((p[1], r, c)) # thêm quân vừa tìm được vào ds theo màu vừa tạo trên
+        """#VD vua trắng "wK" ở e1 (7,4) thì:
+        pieces = {
+            'w': [('K', 7, 4)],
+            'b': []
+            }"""
         
         # loại bỏ vua khỏi danh sách để kiểm tra
+        w = [p for p in pieces['w'] if p[0] !='K'] # như VD trên 'w': [('K', 7, 4)], vậy p[0] chính là K, P[1]=7
+        b = [p for p in pieces['b'] if p[0] !="K"]
         
+        # vua vs vua
+        if len(w) == 0 and len(b) == 0:
+            return True
+        
+        # vua + tượng vs vua hoặc vua + mã vs vua
+        if len(b) == 0 and len(w) == 1 and w[0][0] in ('B', 'N'):
+            return True
+        if len(w) == 0 and len(b) == 1 and  b[0][0] in ('B', 'N'): 
+            return True
+        """VD:  + len(b)== 0 : quân đen chỉ có duy còn lại 1 quân vua
+                + len(b)==1 : còn quân vua và 1 quân duy nhất
+                + w[0][0] in ('B','N'): kiểm tra xem quân còn lại của đen có phải tượng hoặc ngựa không
+                đủ 3 yếu tố hòa cờ
+                
+                NOTe: ta có 'w' [
+                    ('B',7,2)
+                    ]
+                w[0][0] nghĩa là
+                [0] thứ nhất: lấy vị trí đầu của list w là ('B',7,2)
+                [0] thứ hai : lấy vị trí đầu của ('B',7,2) là B
+                Lấy phần tử thứ 0 của w, sau đó lấy phần tử thứ 0 của phần tử đó.
+                b
+                │
+                └── [0] ──→ ('B', 3, 5)
+                              │
+                              ├── [0] → 'B'
+                              ├── [1] →  3
+                              └── [2] →  5
+        """
                     
         
     
